@@ -19,7 +19,7 @@ export const Content = (props) => {
 
 const Wrapper = styled.div`
     width: 100%;
-    height: 214px;
+    min-height: 214px;
     display: flex;
     align-items: center;
     margin-bottom: 20px;
@@ -27,6 +27,7 @@ const Wrapper = styled.div`
     padding: 0 20px;
     gap: 20px;
     .title-container {
+        padding: 10px;
     }
     .img_container {
         img {

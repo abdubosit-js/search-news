@@ -2,9 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 
 export const Content = (props) => {
-    const { image, description, title } = props
+    const { image, description, title, item } = props
+
     return (
-        <Wrapper>
+        <Wrapper href={item.url}>
             <div className="img_container">
                 <img src={image} alt="" />
             </div>
@@ -17,11 +18,13 @@ export const Content = (props) => {
     )
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.a`
     width: 100%;
     min-height: 214px;
     display: flex;
     align-items: center;
+    text-decoration: none;
+    color: black;
     margin-bottom: 20px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     padding: 0 20px;
@@ -30,10 +33,19 @@ const Wrapper = styled.div`
         padding: 10px;
     }
     .img_container {
+        width: 100%;
+        max-width: 300px;
+        height: 170px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         img {
-            width: 300px;
-            height: 170px;
+            max-width: 100%;
+            max-height: 100%;
             object-fit: cover;
         }
+    }
+    @media (max-width: 800px) {
+        flex-direction: column;
     }
 `

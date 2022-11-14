@@ -1,7 +1,7 @@
 import { Button, TextField } from '@mui/material'
 import { Stack } from '@mui/system'
 import { DesktopDatePicker, LocalizationProvider } from '@mui/x-date-pickers'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
@@ -16,12 +16,12 @@ export const Container = () => {
     const inputToRef = useRef()
     const inputFromRef = useRef()
     const dispatch = useDispatch()
-    const btnRef = useRef()
     const { newsData } = useSelector(store => store)
     const date = new Date()
-    const btn = document.querySelector(".MuiButtonBase-root")
     const [valueFrom, setValueFrom] = useState(dayjs(moment(date).startOf("month").format("YYYY-DD-MM")));
     const [valueTo, setValueTo] = useState(dayjs(moment(date).format("YYYY-DD-MM")));
+    const [searchValueHandle, setSearchValueHandle] = useState(false)
+
     const handleChange = (newValue) => {
         setValueFrom(newValue);
     };
@@ -68,8 +68,12 @@ export const Container = () => {
                     </Stack>
                 </LocalizationProvider>
 
-                <TextField id="outlined-basic" inputRef={searchRef} label="Outlined" variant="outlined" />
-                <Button onClick={handleSearch} ref={btnRef} variant="outlined">Search</Button>
+                <TextField id="outlined-basic" inputRef={searchRef} onChange={() => setSearchValueHandle(true)} label="Outlined" variant="outlined" />
+                {searchValueHandle ? 
+                    <Button onClick={handleSearch} variant="outlined">Search</Button> 
+                :
+                    <Button disabled variant="outlined">Search</Button>
+                }
             </div>
 
             <div className="content_wrapper">
